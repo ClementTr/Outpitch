@@ -1,0 +1,396 @@
+-- phpMyAdmin SQL Dump
+-- version 4.4.10
+-- http://www.phpmyadmin.net
+--
+-- Client :  localhost:8889
+-- Généré le :  Lun 09 Mai 2016 à 17:18
+-- Version du serveur :  5.5.42
+-- Version de PHP :  7.0.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données :  `Outpitch`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Club`
+--
+
+CREATE TABLE `Club` (
+  `ID_Club` int(3) NOT NULL,
+  `Name` varchar(30) NOT NULL,
+  `Country` varchar(20) NOT NULL,
+  `Link` varchar(30) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Club`
+--
+
+INSERT INTO `Club` (`ID_Club`, `Name`, `Country`, `Link`) VALUES
+(1, 'ArsenalFC', 'England', 'Arsenal.png'),
+(2, 'ASMonacoFC', 'France', 'ASMonaco.png'),
+(3, 'ParisSaint-Germain', 'France', 'PSG.png'),
+(4, 'OlympiquedeMarseille', 'France', 'OM.png'),
+(5, 'OlympiqueLyonnais', 'France', 'OL.png'),
+(6, 'OGCNice', 'France', 'Nice.png'),
+(7, 'LOSC', 'France', 'Lille.png'),
+(8, 'StadeRennaisFC', 'France', 'Rennes.png'),
+(9, 'ManchesterCityFC', 'England', 'ManCity.png'),
+(10, 'ManchesterUnitedFC', 'England', 'ManUnited.png'),
+(11, 'ChelseaFC', 'England', 'Chelsea.png'),
+(12, 'LiverpoolFC', 'England', 'Liverpool.png'),
+(13, 'RealMadridCF', 'Spain', 'RM.png'),
+(14, 'FCBarcelona', 'Spain', 'Barcelona.png'),
+(15, 'ClubAtléticodeMadrid', 'Spain', 'AMadrid.png'),
+(16, 'VillarealCF', 'Spain', 'Villareal.png'),
+(17, 'ACMilan', 'Italy', 'ACMilan.png'),
+(18, 'FCInternazionaleMilano', 'Italy', 'InterMilan.png'),
+(19, 'ASRoma', 'Italy', 'ASRoma.png'),
+(20, 'JuventusFC', 'Italy', 'Juventus.png'),
+(21, 'SSCNapoli', 'Italy', 'Napoli.png'),
+(22, 'SLBenfica', 'Portugal', 'Benfica.png'),
+(23, 'SportingClubedePortugal', 'Portugal', 'Sporting.png'),
+(24, 'FCPorto', 'Portugal', 'FCPorto.png'),
+(25, 'FCBayernMünchen', 'Germany', 'Munich.png'),
+(26, 'BV09BorussiaDortmund', 'Germany', 'Dortmund.png'),
+(27, 'TSVBayer04Leverkusen', 'Germany', 'Leverkusen.png'),
+(28, 'PSVEindhoven', 'Netherlands', 'PSV.png'),
+(29, 'GalatasaraySK', 'Turkey', 'Galatasaray.png'),
+(30, 'FenerbahceSK', 'Turkey', 'Fenerbahce.png');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Game`
+--
+
+CREATE TABLE `Game` (
+  `ID_Game` int(11) NOT NULL,
+  `ID_Team` int(11) NOT NULL,
+  `Date` date NOT NULL,
+  `Goals_For` int(11) NOT NULL,
+  `Goals_Against` int(11) NOT NULL,
+  `Opponent` varchar(30) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Game`
+--
+
+INSERT INTO `Game` (`ID_Game`, `ID_Team`, `Date`, `Goals_For`, `Goals_Against`, `Opponent`) VALUES
+(1, 1, '2016-05-09', 3, 0, 'Barcelone');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Link_Player_Team`
+--
+
+CREATE TABLE `Link_Player_Team` (
+  `ID_Player_Team` int(11) NOT NULL,
+  `ID_Player` int(11) NOT NULL,
+  `ID_Team` int(11) NOT NULL,
+  `Voted` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Link_Player_Team`
+--
+
+INSERT INTO `Link_Player_Team` (`ID_Player_Team`, `ID_Player`, `ID_Team`, `Voted`) VALUES
+(1, 1, 1, 0),
+(2, 2, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Link_Vote`
+--
+
+CREATE TABLE `Link_Vote` (
+  `ID_Vote` int(11) NOT NULL,
+  `ID_Voter` int(11) NOT NULL,
+  `ID_Candidate` int(11) NOT NULL,
+  `ID_Team` int(11) NOT NULL,
+  `ID_Trophy` int(11) NOT NULL,
+  `ID_Game` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Nation`
+--
+
+CREATE TABLE `Nation` (
+  `ID_Nation` int(3) NOT NULL,
+  `Name` varchar(30) NOT NULL,
+  `Link` varchar(30) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Nation`
+--
+
+INSERT INTO `Nation` (`ID_Nation`, `Name`, `Link`) VALUES
+(1, 'France', 'France.png'),
+(2, 'England', 'England.png'),
+(3, 'Scotland', 'Scotland.png'),
+(4, 'Wales', 'Wales.png'),
+(5, 'Ireland', 'Ireland.png'),
+(6, 'Northern Ireland', 'North_Ireland.png'),
+(7, 'Spain', 'Spain.png'),
+(8, 'Portugal', 'Portugal.png'),
+(9, 'Germany', 'Germany.png'),
+(10, 'Belgium', 'Belgium.png'),
+(11, 'Netherlands', 'Netherlands.png'),
+(12, 'Denmark', 'Denmark.png'),
+(13, 'Poland', 'Poland.png'),
+(14, 'Italy', 'ltaly.png'),
+(15, 'Monaco', 'Monaco.png'),
+(16, 'Switzerland ', 'Switzerland.png'),
+(17, 'Czech Republic', 'Czech.png'),
+(18, 'Hungary', 'Hungary.png'),
+(19, 'Austria', 'Austria.png'),
+(20, 'Greece', 'Greece.png'),
+(21, 'Morocco', 'Morocco.png'),
+(22, 'Algeria', 'Algeria.png'),
+(23, 'Tunisia', 'Tunisia.png'),
+(24, 'Turkey', 'Turkey.png'),
+(25, 'Mali', 'Mali.png'),
+(26, 'Ivory Coast', 'Ivory.png'),
+(27, 'USA', 'USA.png'),
+(28, 'Canada', 'Canada.png'),
+(29, 'Mexico', 'Mexico.png'),
+(30, 'Brazil', 'Brazil.png'),
+(31, 'Argentina', 'Argentina.png'),
+(32, 'Colombia', 'Colombia.png');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Player`
+--
+
+CREATE TABLE `Player` (
+  `ID_Player` int(11) NOT NULL,
+  `Picture` varchar(14) NOT NULL DEFAULT 'Jack.png',
+  `Firstname` varchar(20) NOT NULL,
+  `Lastname` varchar(20) NOT NULL,
+  `Age` int(3) NOT NULL,
+  `Mail` varchar(50) NOT NULL,
+  `Username` varchar(20) NOT NULL,
+  `Password` varchar(20) NOT NULL,
+  `Nation` varchar(20) NOT NULL DEFAULT 'France',
+  `Club` varchar(20) NOT NULL DEFAULT 'Arsenal',
+  `Position` varchar(25) NOT NULL DEFAULT 'Attaquant',
+  `Diaby_Trophy` int(3) NOT NULL DEFAULT '0',
+  `ManOfTheMatch` int(3) NOT NULL DEFAULT '0',
+  `FailOfTheMatch` int(3) NOT NULL DEFAULT '0',
+  `Dejong_Trophy` int(3) NOT NULL DEFAULT '0',
+  `Ronaldinho_Trophy` int(3) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Player`
+--
+
+INSERT INTO `Player` (`ID_Player`, `Picture`, `Firstname`, `Lastname`, `Age`, `Mail`, `Username`, `Password`, `Nation`, `Club`, `Position`, `Diaby_Trophy`, `ManOfTheMatch`, `FailOfTheMatch`, `Dejong_Trophy`, `Ronaldinho_Trophy`) VALUES
+(1, 'Jack.png', 'Clément', 'Tailleur', 22, 'clement.tailleur@gmail.com', 'Chèvritos', 'Bendtner', 'France', 'ArsenalFC', 'Wingers', 0, 0, 0, 0, 0),
+(2, 'Profile_2.png', 'Cyril ', 'Monti ', 22, 'cyril.monty@gmail.com ', 'DarkMontoche ', 'Merguez ', 'France ', 'OlympiquedeMarseille', 'Striker ', 0, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Stats`
+--
+
+CREATE TABLE `Stats` (
+  `ID_Stat` int(11) NOT NULL,
+  `ID_Player` int(11) NOT NULL,
+  `ID_Game` int(11) NOT NULL,
+  `Goals` int(2) NOT NULL DEFAULT '0',
+  `Assists` int(2) NOT NULL DEFAULT '0',
+  `Penalties` int(3) NOT NULL DEFAULT '0',
+  `Pre_Assists` int(3) NOT NULL DEFAULT '0',
+  `Yellow_Card` tinyint(1) NOT NULL DEFAULT '0',
+  `Red_Card` tinyint(1) NOT NULL DEFAULT '0',
+  `Date` date DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Stats`
+--
+
+INSERT INTO `Stats` (`ID_Stat`, `ID_Player`, `ID_Game`, `Goals`, `Assists`, `Penalties`, `Pre_Assists`, `Yellow_Card`, `Red_Card`, `Date`) VALUES
+(1, 1, 0, 0, 0, 0, 0, 0, 0, NULL),
+(2, 1, 0, 0, 0, 0, 0, 0, 0, NULL),
+(3, 1, 0, 1, 3, 0, 0, 0, 1, '2016-05-09'),
+(4, 2, 0, 0, 0, 0, 0, 0, 0, NULL),
+(5, 2, 0, 0, 0, 0, 0, 0, 0, NULL),
+(6, 2, 0, 4, 0, 3, 0, 0, 1, '2016-05-09'),
+(7, 2, 0, 0, 0, 0, 0, 0, 1, '2016-05-09'),
+(8, 2, 0, 0, 0, 0, 0, 0, 1, '2016-05-09'),
+(9, 2, 0, 0, 0, 0, 0, 0, 1, '2016-05-09'),
+(10, 2, 0, 0, 0, 0, 0, 0, 1, '2016-05-09'),
+(11, 2, 0, 0, 0, 0, 0, 0, 1, '2016-05-09'),
+(12, 2, 0, 0, 1, 0, 0, 0, 1, '2016-04-09');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Team`
+--
+
+CREATE TABLE `Team` (
+  `ID_Team` int(11) NOT NULL,
+  `League` varchar(15) NOT NULL DEFAULT 'District ',
+  `Name` varchar(50) NOT NULL,
+  `Abbreviation` varchar(4) NOT NULL DEFAULT 'AFC',
+  `Color` varchar(10) NOT NULL DEFAULT 'Red',
+  `Password` varchar(15) NOT NULL,
+  `Time` varchar(30) NOT NULL DEFAULT 'OFF',
+  `Voting` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Team`
+--
+
+INSERT INTO `Team` (`ID_Team`, `League`, `Name`, `Abbreviation`, `Color`, `Password`, `Time`, `Voting`) VALUES
+(1, 'Pro', 'Arsenal', 'AFC', 'Red', 'Wilshere', '2016-05-10 04:47:04 PM ', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Trophies`
+--
+
+CREATE TABLE `Trophies` (
+  `ID_Trophy` int(11) NOT NULL,
+  `Name` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `Trophies`
+--
+
+INSERT INTO `Trophies` (`ID_Trophy`, `Name`) VALUES
+(1, 'Diaby_Trophy'),
+(2, 'Dejong_Trophy'),
+(3, 'Ronaldinho_Trophy'),
+(4, 'ManOfTheMatch'),
+(5, 'FailOfTheMatch');
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `Club`
+--
+ALTER TABLE `Club`
+  ADD PRIMARY KEY (`ID_Club`);
+
+--
+-- Index pour la table `Game`
+--
+ALTER TABLE `Game`
+  ADD PRIMARY KEY (`ID_Game`);
+
+--
+-- Index pour la table `Link_Player_Team`
+--
+ALTER TABLE `Link_Player_Team`
+  ADD PRIMARY KEY (`ID_Player_Team`);
+
+--
+-- Index pour la table `Link_Vote`
+--
+ALTER TABLE `Link_Vote`
+  ADD PRIMARY KEY (`ID_Vote`);
+
+--
+-- Index pour la table `Nation`
+--
+ALTER TABLE `Nation`
+  ADD PRIMARY KEY (`ID_Nation`);
+
+--
+-- Index pour la table `Player`
+--
+ALTER TABLE `Player`
+  ADD PRIMARY KEY (`ID_Player`);
+
+--
+-- Index pour la table `Stats`
+--
+ALTER TABLE `Stats`
+  ADD PRIMARY KEY (`ID_Stat`);
+
+--
+-- Index pour la table `Team`
+--
+ALTER TABLE `Team`
+  ADD PRIMARY KEY (`ID_Team`);
+
+--
+-- Index pour la table `Trophies`
+--
+ALTER TABLE `Trophies`
+  ADD PRIMARY KEY (`ID_Trophy`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `Club`
+--
+ALTER TABLE `Club`
+  MODIFY `ID_Club` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT pour la table `Game`
+--
+ALTER TABLE `Game`
+  MODIFY `ID_Game` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `Link_Player_Team`
+--
+ALTER TABLE `Link_Player_Team`
+  MODIFY `ID_Player_Team` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `Link_Vote`
+--
+ALTER TABLE `Link_Vote`
+  MODIFY `ID_Vote` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `Nation`
+--
+ALTER TABLE `Nation`
+  MODIFY `ID_Nation` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT pour la table `Player`
+--
+ALTER TABLE `Player`
+  MODIFY `ID_Player` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `Stats`
+--
+ALTER TABLE `Stats`
+  MODIFY `ID_Stat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT pour la table `Team`
+--
+ALTER TABLE `Team`
+  MODIFY `ID_Team` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `Trophies`
+--
+ALTER TABLE `Trophies`
+  MODIFY `ID_Trophy` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
